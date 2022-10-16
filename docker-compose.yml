@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  mysql:
+    container_name: mysql8
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: "123"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+    networks:
+      - mysqlnet
+
+  adminer:
+    image: adminer
+    ports:
+      - 9090:8080
+    networks:
+      - mysqlnet
+
+networks: 
+  mysqlnet:
+    driver: bridge
+    external: true
